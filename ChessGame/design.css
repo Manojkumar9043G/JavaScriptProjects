@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#GameBored{
+    width: 320px;
+    height: 320px;
+    background-color: rgb(105, 168, 185);
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.pieces{
+    width: 40px;
+    height: 40px;
+}
+svg{
+    width: 30px;
+    height: 30px;
+    margin: 5px
+}
+.red{
+    background-color: rgb(211, 70, 70);
+}
+.blackPicese{
+    color: black;
+}
+
+.white{
+    fill: white;
+}
