@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=z, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="head">
+        King Maker
+    </h1>
+    <h2 id="name">
+        Manoj kumar
+    </h2>
+    <div class="hello" onclick="changeHeader()">
+        Change Header <br>
+        <a href="" onclick="changeName()">Change Name</a>
+    </div>
+    <script>
+        function changeHeader(){
+            document.querySelector('#head').innerHTML = 'KillerKing';
+        }
+        function changeName(){
+            
+            document.querySelector('#name').innerHTML = 'Vishwa'.stopPropagation();
+        }
+    </script>
+</body>
+</html>
