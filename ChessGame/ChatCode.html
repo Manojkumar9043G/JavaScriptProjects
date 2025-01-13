@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .chessboard {
+            display: grid;
+            grid-template-columns: repeat(8, 60px);
+            grid-template-rows: repeat(8, 60px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: 2px solid #333;
+        }
+        .square {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .square:nth-child(odd) {
+            background-color: #769656;
+        }
+        .square:nth-child(even) {
+            background-color: #eeeed2;
+        }
+        .square img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div class="chessboard"></div>
+
+    <script>
+        const chessboard = document.querySelector('.chessboard');
+        const initialSetup = [
+            ['rook', 'knight', 'bishop', 'queen', 'king', 'bishop', 'knight', 'rook'],
+            ['pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn'],
+            ...Array(4).fill(Array(8).fill('')),
+            ['pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn'],
+            ['rook', 'knight', 'bishop', 'queen', 'king', 'bishop', 'knight', 'rook']
+        ];
+
+        const pieceImages = {
+            'pawn': 'https://upload.wikimedia.org/wikipedia/commons/c/c7/Chess_pdt60.png',
+            'rook': 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Chess_rdt60.png',
+            'knight': 'https://upload.wikimedia.org/wikipedia/commons/f/f1/Chess_ndt60.png',
+            'bishop': 'https://upload.wikimedia.org/wikipedia/commons/9/98/Chess_bdt60.png',
+            'queen': 'https://upload.wikimedia.org/wikipedia/commons/4/47/Chess_qdt60.png',
+            'king': 'https://upload.wikimedia.org/wikipedia/commons/f/f0/Chess_kdt60.png'
+        };
+
+        const boardState = Array.from({ length: 8 }, (_, row) => initialSetup[row].slice());
+
+        function renderBoard() {
+            chessboard.innerHTML = '';
+            boardState.forEach((row, rowIndex) => {
+                row.forEach((piece, colIndex) => {
+                    const square = document.createElement('div');
+                    square.classList.add('square');
+                    if ((rowIndex + colIndex) % 2 === 0) {
+                        square.style.backgroundColor = '#eeeed2';
+                    } else {
+                        square.style.backgroundColor = '#769656';
+                    }
+                    if (piece) {
+                        const img = document.createElement('img');
+                        img.src = pieceImages[piece];
+                        img.alt = piece;
+                        square.appendChild(img);
+                    }
+                    square.dataset.row = rowIndex;
+                    square.dataset.col = colIndex;
+                    chessboard.appendChild(square);
+                });
+            });
+        }
+
+        let selectedSquare = null;
+
+        chessboard.addEventListener('click', (event) => {
+            const target = event.target.closest('.square');
+            if (!target) return;
+
+            const row = parseInt(target.dataset.row, 10);
+            const col = parseInt(target.dataset.col, 10);
+
+            if (selectedSquare) {
+                const [prevRow, prevCol] = selectedSquare;
+                if (isValidMove(prevRow, prevCol, row, col)) {
+                    boardState[row][col] = boardState[prevRow][prevCol];
+                    boardState[prevRow][prevCol] = '';
+                    renderBoard();
+                }
+                selectedSquare = null;
+            } else if (boardState[row][col]) {
+                selectedSquare = [row, col];
+            }
+        });
+
+        function isValidMove(fromRow, fromCol, toRow, toCol) {
+            const piece = boardState[fromRow][fromCol];
+            if (!piece) return false;
+
+            // Basic pawn movement logic (expand for other pieces)
+            if (piece === 'pawn') {
+                const direction = fromRow < 4 ? 1 : -1;
+                if (toRow === fromRow + direction && toCol === fromCol && !boardState[toRow][toCol]) {
+                    return true;
+                }
+                if (toRow === fromRow + direction && Math.abs(toCol - fromCol) === 1 && boardState[toRow][toCol]) {
+                    return true;
+                }
+            }
+
+            // Add logic for other pieces here
+
+            return false;
+        }
+
+        renderBoard();
+    </script>
+</body>
+</html>

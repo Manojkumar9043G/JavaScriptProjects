@@ -1,56 +1,55 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-#GameBored{
-    width: 400px;
-    height: 400px;
-    position: absolute;
+#Gamebored{
+    width: 320px;
+    height: 320px;
+    margin:auto;
+    margin-top: 50px;
     display: flex;
-    flex-wrap:wrap;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+    flex-wrap: wrap;
     border: 1px solid black;
+}
+.Square{
+    width: 40px;
+    height: 40px;
 }
 path{
     position: relative;
-    z-index: -10;
-}
-.pieceBack{
-    position: relative;
-    width: 50px;
-    height: 50px;
     z-index: -9;
 }
-.piece{
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    margin-top: 5px;
-    z-index: 10;
-    text-align: center;
-    /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
-}
-.green{
-    background-color: rgb(176, 226, 100);
-}
-.blue{
-    background-color: rgb(112, 145, 189);
-}
-svg{
-    width: 35px;
-    height: 35px;
-}
 
+.Square svg{
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    position: relative;
+    z-index: -10;
+}
+.piece{
+    position: relative;
+    z-index: 10;
+}
+.brown{
+    background-color:rgb(255, 134, 107);
+}
+.white1{
+    background-color: rgb(99, 104, 105);
+}
 .white{
-    fill: rgb(255, 255, 255);
-    /* box-shadow: 1px 1px 1px black; */
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    fill: rgb(251, 240, 255);
+    text-shadow: 1px 1px 2px rgb(0, 0, 0);
 }
 .black{
-    fill: rgb(0, 0, 0);
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    fill: black;
 }
-
+p{
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 19px;
+}
+#info-display{
+    color: red;
+}
